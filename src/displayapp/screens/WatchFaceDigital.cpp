@@ -79,8 +79,7 @@ WatchFaceDigital::WatchFaceDigital(DisplayApp* app,
 
   heartbeatValue = lv_label_create(lv_scr_act(), nullptr);
   lv_obj_set_style_local_text_color(heartbeatValue, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, lv_color_hex(0xCE1B1B));
-  lv_obj_set_style_local_text_font(heartbeatValue, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &hebrew);
-  lv_label_set_text(heartbeatValue, "\xD7\x90");
+  lv_label_set_text(heartbeatValue, "");
   lv_obj_align(heartbeatValue, heartbeatIcon, LV_ALIGN_OUT_RIGHT_MID, 5, 0);
 
   stepValue = lv_label_create(lv_scr_act(), nullptr);
@@ -113,16 +112,52 @@ std::map<int,char*> WatchFaceDigital::hebrewMap = {
    {12, "\xD7\x91\xD7\x99"},
    {13, "\xD7\x92\xD7\x99"},
    {14, "\xD7\x93\xD7\x99"},
-   {15, "\xD7\x94\xD7\x99"},
-   {16, "\xD7\x95\xD7\x99"},
+   {15, "\xD7\x95\xD7\x98"},
+   {16, "\xD7\x96\xD7\x98"},
    {17, "\xD7\x96\xD7\x99"},
    {18, "\xD7\x97\xD7\x99"},
    {19, "\xD7\x98\xD7\x99"},
-   {20, "\xD7\x90\xD7\x9A"},
-   {21, "\xD7\x91\xD7\x9A"},
-   {22, "\xD7\x92\xD7\x9A"},
-   {23, "\xD7\x93\xD7\x9A"},
-   {24, "\xD7\x94\xD7\x9A"}
+   {20, "\xD7\x9B"},
+   {21, "\xD7\x90\xD7\x9B"},
+   {22, "\xD7\x91\xD7\x9B"},
+   {23, "\xD7\x92\xD7\x9B"},
+   {24, "\xD7\x93\xD7\x9B"},
+   {25, "\xD7\x94\xD7\x9B"},
+   {26, "\xD7\x95\xD7\x9B"},
+   {27, "\xD7\x96\xD7\x9B"},
+   {28, "\xD7\x97\xD7\x9B"},
+   {29, "\xD7\x98\xD7\x9B"},
+   {30, "\xD7\x9C"},
+   {31, "\xD7\x90\xD7\x9C"},
+   {32, "\xD7\x91\xD7\x9C"},
+   {33, "\xD7\x92\xD7\x9C"},
+   {34, "\xD7\x93\xD7\x9C"},
+   {35, "\xD7\x94\xD7\x9C"},
+   {36, "\xD7\x95\xD7\x9C"},
+   {37, "\xD7\x96\xD7\x9C"},
+   {38, "\xD7\x97\xD7\x9C"},
+   {39, "\xD7\x98\xD7\x9C"},
+   {40, "\xD7\x9E"},
+   {41, "\xD7\x90\xD7\x9DE"},
+   {42, "\xD7\x91\xD7\x9DE"},
+   {43, "\xD7\x92\xD7\x9DE"},
+   {44, "\xD7\x93\xD7\x9DE"},
+   {45, "\xD7\x94\xD7\x9DE"},
+   {46, "\xD7\x95\xD7\x9DE"},
+   {47, "\xD7\x96\xD7\x9DE"},
+   {48, "\xD7\x97\xD7\x9DE"},
+   {49, "\xD7\x98\xD7\x9DE"},
+   {50, "\xD7\xA0"},
+   {51, "\xD7\x90\xD7\xA0"},
+   {52, "\xD7\x90\xD7\xA0"},
+   {53, "\xD7\x90\xD7\xA0"},
+   {54, "\xD7\x90\xD7\xA0"},
+   {55, "\xD7\x90\xD7\xA0"},
+   {56, "\xD7\x90\xD7\xA0"},
+   {57, "\xD7\x90\xD7\xA0"},
+   {58, "\xD7\x90\xD7\xA0"},
+   {59, "\xD7\x90\xD7\xA0"},
+   {60, "\xD7\xA1"} 
 };
 
 WatchFaceDigital::~WatchFaceDigital() {
@@ -177,10 +212,10 @@ void WatchFaceDigital::Refresh() {
     int hour = time.hours().count();
     auto minute = time.minutes().count();
 
-    char minutesChar[3];
-    sprintf(minutesChar, "%02d", static_cast<int>(minute));
+    char minutesChar[128];
+    sprintf(minutesChar, "%s",  hebrewMap.at(static_cast<int>(minute)));
 
-    char hoursChar[64];
+    char hoursChar[128];
     char ampmChar[3];
     if (settingsController.GetClockType() == Controllers::Settings::ClockType::H24) {
       sprintf(hoursChar, "%s", hebrewMap.at(hour));
@@ -217,7 +252,7 @@ void WatchFaceDigital::Refresh() {
       lv_label_set_text_fmt(label_time, "%s:%s", hoursChar, minutesChar);
 
       if (settingsController.GetClockType() == Controllers::Settings::ClockType::H12) {
-        lv_obj_align(label_time, lv_scr_act(), LV_ALIGN_IN_RIGHT_MID, 0, 0);
+        lv_obj_align(label_time, lv_scr_act(), LV_ALIGN_IN_LEFT_MID, 0, 0);
       } else {
         lv_obj_align(label_time, lv_scr_act(), LV_ALIGN_CENTER, 0, 0);
       }
@@ -243,10 +278,10 @@ void WatchFaceDigital::Refresh() {
   if (heartbeat.IsUpdated() || heartbeatRunning.IsUpdated()) {
     if (heartbeatRunning.Get()) {
       lv_obj_set_style_local_text_color(heartbeatIcon, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, lv_color_hex(0xCE1B1B));
-      //lv_label_set_text_fmt(heartbeatValue, "%d", heartbeat.Get());
+      lv_label_set_text_fmt(heartbeatValue, "%d", heartbeat.Get());
     } else {
       lv_obj_set_style_local_text_color(heartbeatIcon, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, lv_color_hex(0x1B1B1B));
-      //lv_label_set_text_static(heartbeatValue, "");
+      lv_label_set_text_static(heartbeatValue, "");
     }
 
     lv_obj_align(heartbeatIcon, lv_scr_act(), LV_ALIGN_IN_BOTTOM_LEFT, 0, 0);

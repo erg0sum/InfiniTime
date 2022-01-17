@@ -59,8 +59,7 @@ WatchFaceDigital::WatchFaceDigital(DisplayApp* app,
 
   label_time = lv_label_create(lv_scr_act(), nullptr);
   lv_obj_set_style_local_text_font(label_time, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &hebrew_big);
-
-  lv_obj_align(label_time, lv_scr_act(), LV_ALIGN_IN_RIGHT_MID, 0, 0);
+  lv_obj_align(label_time, lv_scr_act(), LV_ALIGN_IN_LEFT_MID, 0, 0);
 
   label_time_ampm = lv_label_create(lv_scr_act(), nullptr);
   lv_label_set_text_static(label_time_ampm, "");
@@ -110,8 +109,20 @@ std::map<int,char*> WatchFaceDigital::hebrewMap = {
    {8, "\xD7\x97"},
    {9, "\xD7\x98"},
    {10, "\xD7\x99"},
-   {11, "\xD7\x99\xD7\x90"},
-   {12, "\xD7\x99\xD7\x91"}
+   {11, "\xD7\x90\xD7\x99"},
+   {12, "\xD7\x91\xD7\x99"},
+   {13, "\xD7\x92\xD7\x99"},
+   {14, "\xD7\x93\xD7\x99"},
+   {15, "\xD7\x94\xD7\x99"},
+   {16, "\xD7\x95\xD7\x99"},
+   {17, "\xD7\x96\xD7\x99"},
+   {18, "\xD7\x97\xD7\x99"},
+   {19, "\xD7\x98\xD7\x99"},
+   {20, "\xD7\x90\xD7\x9A"},
+   {21, "\xD7\x91\xD7\x9A"},
+   {22, "\xD7\x92\xD7\x9A"},
+   {23, "\xD7\x93\xD7\x9A"},
+   {24, "\xD7\x94\xD7\x9A"}
 };
 
 WatchFaceDigital::~WatchFaceDigital() {
@@ -172,7 +183,7 @@ void WatchFaceDigital::Refresh() {
     char hoursChar[64];
     char ampmChar[3];
     if (settingsController.GetClockType() == Controllers::Settings::ClockType::H24) {
-      sprintf(hoursChar, "%02d", hour);
+      sprintf(hoursChar, "%s", hebrewMap.at(hour));
     } else {
       if (hour == 0 && hour != 12) {
         hour = 12;
@@ -186,7 +197,7 @@ void WatchFaceDigital::Refresh() {
         hour = hour - 12;
         sprintf(ampmChar, "PM");
       }
-      sprintf(hoursChar, "%s", hebrewMap.at(1));
+      sprintf(hoursChar, "%s", hebrewMap.at(hour));
     }
 
     if ((hoursChar[0] != displayedChar[0]) or (hoursChar[1] != displayedChar[1]) or (minutesChar[0] != displayedChar[2]) or

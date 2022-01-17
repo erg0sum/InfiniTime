@@ -6,6 +6,7 @@
 #include <memory>
 #include "displayapp/screens/Screen.h"
 #include "components/datetime/DateTimeController.h"
+#include <map>
 
 namespace Pinetime {
   namespace Controllers {
@@ -36,6 +37,7 @@ namespace Pinetime {
 
       private:
         char displayedChar[5] {};
+        static map<int,int> myMap;
 
         uint16_t currentYear = 1970;
         Pinetime::Controllers::DateTime::Months currentMonth = Pinetime::Controllers::DateTime::Months::Unknown;

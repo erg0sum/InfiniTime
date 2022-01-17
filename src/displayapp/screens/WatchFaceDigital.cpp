@@ -99,6 +99,7 @@ WatchFaceDigital::WatchFaceDigital(DisplayApp* app,
 }
 
 std::map<int,char*> WatchFaceDigital::hebrewMap = {
+   {0, ""},
    {1, "\xD7\x90"},
    {2, "\xD7\x91"},
    {3, "\xD7\x92"},

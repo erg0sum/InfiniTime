@@ -185,7 +185,7 @@ void WatchFaceDigital::Refresh() {
         hour = hour - 12;
         sprintf(ampmChar, "PM");
       }
-      sprintf(hoursChar, "%s", hewbrewMap.at(hour));
+      sprintf(hoursChar, "%s", hebrewMap.at(hour));
     }
 
     if ((hoursChar[0] != displayedChar[0]) or (hoursChar[1] != displayedChar[1]) or (minutesChar[0] != displayedChar[2]) or

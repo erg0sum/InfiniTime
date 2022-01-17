@@ -149,14 +149,14 @@ std::map<int,char*> WatchFaceDigital::hebrewMap = {
    {49, "\xD7\x98\xD7\x9DE"},
    {50, "\xD7\xA0"},
    {51, "\xD7\x90\xD7\xA0"},
-   {52, "\xD7\x90\xD7\xA0"},
-   {53, "\xD7\x90\xD7\xA0"},
-   {54, "\xD7\x90\xD7\xA0"},
-   {55, "\xD7\x90\xD7\xA0"},
-   {56, "\xD7\x90\xD7\xA0"},
-   {57, "\xD7\x90\xD7\xA0"},
-   {58, "\xD7\x90\xD7\xA0"},
-   {59, "\xD7\x90\xD7\xA0"},
+   {52, "\xD7\x91\xD7\xA0"},
+   {53, "\xD7\x92\xD7\xA0"},
+   {54, "\xD7\x93\xD7\xA0"},
+   {55, "\xD7\x94\xD7\xA0"},
+   {56, "\xD7\x95\xD7\xA0"},
+   {57, "\xD7\x96\xD7\xA0"},
+   {58, "\xD7\x97\xD7\xA0"},
+   {59, "\xD7\x98\xD7\xA0"},
    {60, "\xD7\xA1"} 
 };
 
@@ -211,9 +211,10 @@ void WatchFaceDigital::Refresh() {
 
     int hour = time.hours().count();
     auto minute = time.minutes().count();
-
+    auto seconds = time.seconds().count(); 
+    
     char minutesChar[128];
-    sprintf(minutesChar, "%s",  hebrewMap.at(static_cast<int>(minute)));
+    sprintf(minutesChar, "%s",  hebrewMap.at(static_cast<int>(seconds)));
 
     char hoursChar[128];
     char ampmChar[3];

@@ -138,15 +138,15 @@ std::map<int,char*> WatchFaceDigital::hebrewMap = {
    {38, "\xD7\x97\xD7\x9C"},
    {39, "\xD7\x98\xD7\x9C"},
    {40, "\xD7\x9E"},
-   {41, "\xD7\x90\xD7\x9DE"},
-   {42, "\xD7\x91\xD7\x9DE"},
-   {43, "\xD7\x92\xD7\x9DE"},
-   {44, "\xD7\x93\xD7\x9DE"},
-   {45, "\xD7\x94\xD7\x9DE"},
-   {46, "\xD7\x95\xD7\x9DE"},
-   {47, "\xD7\x96\xD7\x9DE"},
-   {48, "\xD7\x97\xD7\x9DE"},
-   {49, "\xD7\x98\xD7\x9DE"},
+   {41, "\xD7\x90\xD7\x9E"},
+   {42, "\xD7\x91\xD7\x9E"},
+   {43, "\xD7\x92\xD7\x9E"},
+   {44, "\xD7\x93\xD7\x9E"},
+   {45, "\xD7\x94\xD7\x9E"},
+   {46, "\xD7\x95\xD7\x9E"},
+   {47, "\xD7\x96\xD7\x9E"},
+   {48, "\xD7\x97\xD7\x9E"},
+   {49, "\xD7\x98\xD7\x9E"},
    {50, "\xD7\xA0"},
    {51, "\xD7\x90\xD7\xA0"},
    {52, "\xD7\x91\xD7\xA0"},
@@ -211,10 +211,13 @@ void WatchFaceDigital::Refresh() {
 
     int hour = time.hours().count();
     auto minute = time.minutes().count();
-    auto seconds = time.seconds().count(); 
+    auto second = time.seconds().count(); 
     
     char minutesChar[128];
-    sprintf(minutesChar, "%s",  hebrewMap.at(static_cast<int>(seconds)));
+    sprintf(minutesChar, "%s",  hebrewMap.at(static_cast<int>(minute)));
+
+    char secondsChar[128];
+    sprintf(secondsChar, "%s",  hebrewMap.at(static_cast<int>(second)));
 
     char hoursChar[128];
     char ampmChar[3];
@@ -250,7 +253,7 @@ void WatchFaceDigital::Refresh() {
         }
       }
 
-      lv_label_set_text_fmt(label_time, "%s:%s", hoursChar, minutesChar);
+      lv_label_set_text_fmt(label_time, "%s:%s:%s", hoursChar, minutesChar, secondsChar);
 
       if (settingsController.GetClockType() == Controllers::Settings::ClockType::H12) {
         lv_obj_align(label_time, lv_scr_act(), LV_ALIGN_IN_LEFT_MID, 0, 0);

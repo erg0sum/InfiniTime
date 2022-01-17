@@ -81,7 +81,7 @@ WatchFaceDigital::WatchFaceDigital(DisplayApp* app,
   heartbeatValue = lv_label_create(lv_scr_act(), nullptr);
   lv_obj_set_style_local_text_color(heartbeatValue, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, lv_color_hex(0xCE1B1B));
   lv_obj_set_style_local_text_font(heartbeatValue, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &hebrew);
-  lv_label_set_text(heartbeatValue, "ℵ");
+  lv_label_set_text(heartbeatValue, "\xD7\x90");
   lv_obj_align(heartbeatValue, heartbeatIcon, LV_ALIGN_OUT_RIGHT_MID, 5, 0);
 
   stepValue = lv_label_create(lv_scr_act(), nullptr);

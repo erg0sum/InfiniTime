@@ -98,10 +98,8 @@ WatchFaceDigital::WatchFaceDigital(DisplayApp* app,
   Refresh();
 }
 
-map<int,int> WatchFaceDigital::myMap = {
-   {1, 2},
-   {3, 4},
-   {5, 6}
+map<int,int> WatchFaceDigital::hebrewMap = {
+   {1, "\xD7\x90"}
 };
 
 WatchFaceDigital::~WatchFaceDigital() {

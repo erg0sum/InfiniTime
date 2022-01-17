@@ -169,7 +169,7 @@ void WatchFaceDigital::Refresh() {
     char minutesChar[3];
     sprintf(minutesChar, "%02d", static_cast<int>(minute));
 
-    char hoursChar[9];
+    char hoursChar[64];
     char ampmChar[3];
     if (settingsController.GetClockType() == Controllers::Settings::ClockType::H24) {
       sprintf(hoursChar, "%02d", hour);
@@ -186,7 +186,7 @@ void WatchFaceDigital::Refresh() {
         hour = hour - 12;
         sprintf(ampmChar, "PM");
       }
-      sprintf(hoursChar, "%s", hebrewMap.at(hour));
+      sprintf(hoursChar, "%s", hebrewMap.at(1));
     }
 
     if ((hoursChar[0] != displayedChar[0]) or (hoursChar[1] != displayedChar[1]) or (minutesChar[0] != displayedChar[2]) or

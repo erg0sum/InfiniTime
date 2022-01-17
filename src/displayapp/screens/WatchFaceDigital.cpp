@@ -80,6 +80,7 @@ WatchFaceDigital::WatchFaceDigital(DisplayApp* app,
 
   heartbeatValue = lv_label_create(lv_scr_act(), nullptr);
   lv_obj_set_style_local_text_color(heartbeatValue, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, lv_color_hex(0xCE1B1B));
+  lv_obj_set_style_local_text_font(heartbeatValue, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &hebrew);
   lv_label_set_text(heartbeatValue, "ℵ");
   lv_obj_align(heartbeatValue, heartbeatIcon, LV_ALIGN_OUT_RIGHT_MID, 5, 0);
 
@@ -215,10 +216,10 @@ void WatchFaceDigital::Refresh() {
   if (heartbeat.IsUpdated() || heartbeatRunning.IsUpdated()) {
     if (heartbeatRunning.Get()) {
       lv_obj_set_style_local_text_color(heartbeatIcon, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, lv_color_hex(0xCE1B1B));
-      lv_label_set_text_fmt(heartbeatValue, "%d", heartbeat.Get());
+      //lv_label_set_text_fmt(heartbeatValue, "%d", heartbeat.Get());
     } else {
       lv_obj_set_style_local_text_color(heartbeatIcon, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, lv_color_hex(0x1B1B1B));
-      lv_label_set_text_static(heartbeatValue, "");
+      //lv_label_set_text_static(heartbeatValue, "");
     }
 
     lv_obj_align(heartbeatIcon, lv_scr_act(), LV_ALIGN_IN_BOTTOM_LEFT, 0, 0);

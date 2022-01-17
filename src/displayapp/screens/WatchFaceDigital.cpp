@@ -98,6 +98,12 @@ WatchFaceDigital::WatchFaceDigital(DisplayApp* app,
   Refresh();
 }
 
+map<int,int> WatchFaceDigital::myMap = {
+   {1, 2},
+   {3, 4},
+   {5, 6}
+};
+
 WatchFaceDigital::~WatchFaceDigital() {
   lv_task_del(taskRefresh);
   lv_obj_clean(lv_scr_act());

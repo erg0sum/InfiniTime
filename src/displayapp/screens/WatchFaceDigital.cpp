@@ -58,7 +58,7 @@ WatchFaceDigital::WatchFaceDigital(DisplayApp* app,
   lv_obj_set_style_local_text_color(label_date, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, lv_color_hex(0x999999));
 
   label_time = lv_label_create(lv_scr_act(), nullptr);
-  lv_obj_set_style_local_text_font(label_time, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &jetbrains_mono_extrabold_compressed);
+  lv_obj_set_style_local_text_font(label_time, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &hebrew_big);
 
   lv_obj_align(label_time, lv_scr_act(), LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
@@ -99,7 +99,18 @@ WatchFaceDigital::WatchFaceDigital(DisplayApp* app,
 }
 
 std::map<int,char*> WatchFaceDigital::hebrewMap = {
-   {1, "\xD7\x90"}
+   {1, "\xD7\x90"},
+   {2, "\xD7\x91"},
+   {3, "\xD7\x92"},
+   {4, "\xD7\x93"},
+   {5, "\xD7\x94"},
+   {6, "\xD7\x95"},
+   {7, "\xD7\x96"},
+   {8, "\xD7\x97"},
+   {9, "\xD7\x98"},
+   {10, "\xD7\x99"},
+   {11, "\xD7\x99\xD7\x90"},
+   {12, "\xD7\x99\xD7\x91"}
 };
 
 WatchFaceDigital::~WatchFaceDigital() {
@@ -157,7 +168,7 @@ void WatchFaceDigital::Refresh() {
     char minutesChar[3];
     sprintf(minutesChar, "%02d", static_cast<int>(minute));
 
-    char hoursChar[3];
+    char hoursChar[9];
     char ampmChar[3];
     if (settingsController.GetClockType() == Controllers::Settings::ClockType::H24) {
       sprintf(hoursChar, "%02d", hour);
@@ -174,7 +185,7 @@ void WatchFaceDigital::Refresh() {
         hour = hour - 12;
         sprintf(ampmChar, "PM");
       }
-      sprintf(hoursChar, "%02d", hour);
+      sprintf(hoursChar, "%s", hewbrewMap.at(hour));
     }
 
     if ((hoursChar[0] != displayedChar[0]) or (hoursChar[1] != displayedChar[1]) or (minutesChar[0] != displayedChar[2]) or

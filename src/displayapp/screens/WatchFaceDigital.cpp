@@ -256,7 +256,7 @@ void WatchFaceDigital::Refresh() {
       lv_label_set_text_fmt(label_time, "%s:%s", hoursChar, minutesChar);
 
       if (settingsController.GetClockType() == Controllers::Settings::ClockType::H12) {
-        lv_obj_align(label_time, lv_scr_act(), LV_ALIGN_IN_LEFT_MID, 0, 0);
+        lv_obj_align(label_time, lv_scr_act(), LV_ALIGN_CENTER, 0, 0);
       } else {
         lv_obj_align(label_time, lv_scr_act(), LV_ALIGN_CENTER, 0, 0);
       }
